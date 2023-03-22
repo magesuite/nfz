@@ -1,0 +1,19 @@
+{
+    "name": "creativestyle/magesuite-nfz",
+    "description": "MageSuite health cheks",
+    "homepage": "https://creativestyle.de",
+    "license": "OSL-3.0",
+    "type": "magento2-module",
+    "require": {
+        "creativestyle/magesuite-discount": "^1.0.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "MageSuite\\Nfz\\": ""
+        }
+    }
+}
+
