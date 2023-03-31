@@ -6,7 +6,7 @@
     "type": "magento2-module",
     "require": {
         "smile/elasticsuite": "*",
-        "magesuite/sorting": "*"
+        "creativestyle/magesuite-sorting": "*"
     },
     "autoload": {
         "files": [
