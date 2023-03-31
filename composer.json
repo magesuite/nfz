@@ -4,6 +4,10 @@
     "homepage": "https://creativestyle.de",
     "license": "OSL-3.0",
     "type": "magento2-module",
+    "require": {
+        "smile/elasticsuite": "*",
+        "magesuite/sorting": "*"
+    },
     "autoload": {
         "files": [
             "registration.php"
