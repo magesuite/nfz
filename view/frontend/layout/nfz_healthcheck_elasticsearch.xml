@@ -1,0 +1,41 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="healthcheck">
+    <head>
+        <!-- Attach css bundle for this page type -->
+        <css src="css/category.css" />
+    </head>
+    <body>
+        <update handle="product_tile"/>
+        <referenceContainer name="content">
+            <block class="MageSuite\Nfz\Block\Elasticsearch\ProductList" name="nfz.products.list" as="product_list" cacheable="false" template="Magento_Catalog::product/list.phtml">
+                <arguments>
+                    <argument name="grid_component_class" xsi:type="string">cs-grid-layout</argument>
+                    <argument name="additional_grid_component_class" xsi:type="string">cs-grid-layout--category</argument>
+                    <argument name="grid_component_list_class" xsi:type="string">cs-grid-layout__grid</argument>
+                    <argument name="grid_component_list_item_class" xsi:type="string">cs-grid-layout__brick</argument>
+                    <argument name="list_component_class" xsi:type="string">cs-products-list</argument>
+                    <argument name="additional_list_component_class" xsi:type="string">cs-products-list--category</argument>
+                    <argument name="list_component_list_class" xsi:type="string">cs-products-list__items</argument>
+                    <argument name="list_component_list_item_class" xsi:type="string">cs-products-list__item</argument>
+                </arguments>
+                <container name="category.product.list.additional" as="additional" />
+                <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers" as="details.renderers">
+                    <block class="Magento\Framework\View\Element\Template" name="category.product.type.details.renderers.default" as="default"/>
+                </block>
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="category.product.addto" as="addto">
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                           name="category.product.addto.compare" as="compare"
+                           template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+                <block class="Magento\Catalog\Block\Product\ProductList\Toolbar" name="product_list_toolbar" template="Magento_Catalog::product/list/toolbar.phtml">
+                    <block class="Magento\Theme\Block\Html\Pager" name="product_list_toolbar_pager"/>
+                </block>
+                <action method="setToolbarBlockName">
+                    <argument name="name" xsi:type="string">product_list_toolbar</argument>
+                </action>
+                <action method="setDefaultDirection">
+                    <argument name="dir" xsi:type="helper" helper="MageSuite\Frontend\Helper\Category\View::getSortDirection"/>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:MageSuite_Changelog:etc/changelog.xsd">
+    <module
+        id="Creativestyle_Nfz"
+        name="Creativestyle_Nfz">
+        <changelog>
+            <tag version="1.0.0" date="2023-03-27">
+                <entry>
+                    <type>FEATURE</type>
+                    <overview>Elasticsearch health check</overview>
+                    <ticket_id>MGS-5066</ticket_id>
+                </entry>
+            </tag>
+        </changelog>
+    </module>
+</config>
