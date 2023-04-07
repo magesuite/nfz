@@ -63,6 +63,12 @@ class ProductList extends \Magento\Catalog\Block\Product\ListProduct
                 $collection->setCurPage(1);
             }
             $collection->setCurPage($pageNumber);
+            $collection->addAttributeToSelect('*');
+
+            $this->_eventManager->dispatch(
+                'catalog_block_product_list_collection',
+                ['collection' => $collection]
+            );
 
             $this->_productCollection = $collection;
         }
