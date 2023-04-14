@@ -7,6 +7,7 @@ namespace MageSuite\Nfz\Block\Elasticsearch;
 class ProductList extends \Magento\Catalog\Block\Product\ListProduct
 {
     protected \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility;
+    protected \MageSuite\Nfz\Helper\Configuration $configuration;
     protected \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory;
     protected \Smile\ElasticsuiteCore\Search\Request\Builder $requestBuilder;
     protected \Magento\Search\Model\SearchEngine $searchEngine;
@@ -14,6 +15,7 @@ class ProductList extends \Magento\Catalog\Block\Product\ListProduct
     public function __construct(
         \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility,
         \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
+        \MageSuite\Nfz\Helper\Configuration $configuration,
         \Magento\Catalog\Block\Product\Context $context,
         \Magento\Catalog\Model\Layer\Resolver $layerResolver,
         \Magento\Framework\Data\Helper\PostHelper $postDataHelper,
@@ -25,6 +27,7 @@ class ProductList extends \Magento\Catalog\Block\Product\ListProduct
         ?\Magento\Catalog\Helper\Output $outputHelper = null
     ) {
         $this->catalogProductVisibility = $catalogProductVisibility;
+        $this->configuration = $configuration;
         $this->productCollectionFactory = $productCollectionFactory;
         $this->requestBuilder = $requestBuilder;
         $this->searchEngine = $searchEngine;
@@ -166,7 +169,7 @@ class ProductList extends \Magento\Catalog\Block\Product\ListProduct
             $this->_storeManager->getStore()->getId(),
             'catalog_view_container',
             1,
-            25,
+            $this->configuration->getConfiguration()->getElasticsearch()->getLimit(),
         );
 
         $queryResponse = $this->searchEngine->search($searchRequest);

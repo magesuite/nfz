@@ -4,6 +4,7 @@
         <nfz>
             <elasticsearch>
                 <healthcheck_url>healthcheck/elasticsearch</healthcheck_url>
+                <limit>25</limit>
             </elasticsearch>
         </nfz>
     </default>
