@@ -7,13 +7,13 @@ namespace MageSuite\Nfz\Controller;
 class NfzHealthcheckUrlRouter implements \Magento\Framework\App\RouterInterface
 {
     protected \Magento\Framework\App\ActionFactory $actionFactory;
-
+    protected \MageSuite\Nfz\Helper\Configuration $config;
     protected \Magento\Framework\App\ResponseInterface $response;
+    protected \Magento\Framework\UrlInterface $url;
 
     public function __construct(
         \Magento\Framework\App\ActionFactory $actionFactory,
         \MageSuite\Nfz\Helper\Configuration $config,
-        \Magento\Framework\App\Response\RedirectInterface $redirect,
         \Magento\Framework\App\ResponseInterface $response,
         \Magento\Framework\UrlInterface $url
     ) {
