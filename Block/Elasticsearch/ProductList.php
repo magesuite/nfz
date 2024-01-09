@@ -73,6 +73,10 @@ class ProductList extends \Magento\Catalog\Block\Product\ListProduct
                 ['collection' => $collection]
             );
 
+            if (!$collection->getSize()) {
+                throw new \Magento\Framework\Exception\NotFoundException(__('Products have not been found'));
+            }
+
             $this->_productCollection = $collection;
         }
 
