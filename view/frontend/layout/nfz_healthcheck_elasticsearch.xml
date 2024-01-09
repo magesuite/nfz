@@ -1,10 +1,5 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="healthcheck">
-    <head>
-        <!-- Attach css bundle for this page type -->
-        <css src="css/category.css" />
-    </head>
     <body>
-        <update handle="product_tile"/>
         <referenceContainer name="content">
             <block class="MageSuite\Nfz\Block\Elasticsearch\ProductList" name="nfz.products.list" as="product_list" cacheable="false" template="Magento_Catalog::product/list.phtml">
                 <arguments>
@@ -16,6 +11,7 @@
                     <argument name="additional_list_component_class" xsi:type="string">cs-products-list--category</argument>
                     <argument name="list_component_list_class" xsi:type="string">cs-products-list__items</argument>
                     <argument name="list_component_list_item_class" xsi:type="string">cs-products-list__item</argument>
+                    <argument name="viewModel" xsi:type="object">Magento\Catalog\ViewModel\Product\OptionsData</argument>
                 </arguments>
                 <container name="category.product.list.additional" as="additional" />
                 <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers" as="details.renderers">

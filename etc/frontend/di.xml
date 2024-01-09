@@ -13,6 +13,11 @@
         </arguments>
     </type>
 
+    <type name="Magento\Framework\View\Layout\Generator\Block">
+        <plugin name="product_list_error_handler"
+                type="MageSuite\Nfz\Plugin\Framework\View\Layout\Generator\Block\ProductListErrorHandler" />
+    </type>
+
     <type name="MageSuite\Nfz\Helper\Configuration">
         <arguments>
             <argument name="healthcheckUrl" xsi:type="array">
