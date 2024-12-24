@@ -18,7 +18,6 @@ class ElasticsearchTest extends \Magento\TestFramework\TestCase\AbstractControll
     public function testElasticsearchHealthcheckOk(): void
     {
         $this->dispatch('healthcheck/elasticsearch');
-        ob_end_clean();
 
         $this->assertStringContainsString('Simple Product', $this->getResponse()->getBody());
         $this->assertEquals(200, $this->getResponse()->getHttpResponseCode());
