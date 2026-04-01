@@ -62,11 +62,10 @@ class ProductList extends \Magento\Catalog\Block\Product\ListProduct
 
             if (is_numeric($pageSize)) {
                 $collection->setPageSize($pageSize);
-            } else {
-                $collection->setCurPage(1);
             }
+
             $collection->setCurPage($pageNumber);
-            $collection->addAttributeToSelect('*');
+            $collection->addAttributeToSelect($this->_catalogConfig->getProductAttributes());
 
             $this->_eventManager->dispatch(
                 'catalog_block_product_list_collection',
