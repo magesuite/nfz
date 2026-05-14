@@ -6,14 +6,10 @@ namespace MageSuite\Nfz\Plugin\Framework\View\Layout\Generator\Block;
 
 class ProductListErrorHandler
 {
-    protected const PRODUCT_LIST_BLOCK_NAME = 'nfz.products.list';
-
-    protected \Magento\Framework\App\ResponseInterface $response;
-
-    public function __construct(\Magento\Framework\App\ResponseInterface $response)
-    {
-        $this->response = $response;
-    }
+    public function __construct(
+        protected \Magento\Framework\App\ResponseInterface $response,
+        protected array $blockList = []
+    ) {}
 
     public function aroundCreateBlock(
         \Magento\Framework\View\Layout\Generator\Block $subject,
@@ -22,7 +18,7 @@ class ProductListErrorHandler
         $name,
         array $arguments = []
     ) {
-        if ($name != self::PRODUCT_LIST_BLOCK_NAME) {
+        if (!in_array($name, $this->blockList)) {
             return $proceed($block, $name, $arguments);
         }
 

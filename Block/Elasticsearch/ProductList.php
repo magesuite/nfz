@@ -4,34 +4,24 @@ declare(strict_types=1);
 
 namespace MageSuite\Nfz\Block\Elasticsearch;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class ProductList extends \Magento\Catalog\Block\Product\ListProduct
 {
-    protected \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility;
-    protected \MageSuite\Nfz\Helper\Configuration $configuration;
-    protected \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory;
-    protected \Smile\ElasticsuiteCore\Search\Request\Builder $requestBuilder;
-    protected \Magento\Search\Model\SearchEngine $searchEngine;
-
     public function __construct(
-        \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility,
-        \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
-        \MageSuite\Nfz\Helper\Configuration $configuration,
+        protected \MageSuite\Nfz\Helper\Configuration $configuration,
+        protected \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
+        protected \Smile\ElasticsuiteCore\Search\Request\Builder $requestBuilder,
+        protected \Magento\Search\Model\SearchEngine $searchEngine,
         \Magento\Catalog\Block\Product\Context $context,
-        \Magento\Catalog\Model\Layer\Resolver $layerResolver,
         \Magento\Framework\Data\Helper\PostHelper $postDataHelper,
-        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
-        \Smile\ElasticsuiteCore\Search\Request\Builder $requestBuilder,
-        \Magento\Search\Model\SearchEngine $searchEngine,
+        \Magento\Catalog\Model\Layer\Resolver $layerResolver,
+        \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
         \Magento\Framework\Url\Helper\Data $urlHelper,
         array $data = [],
         ?\Magento\Catalog\Helper\Output $outputHelper = null
     ) {
-        $this->catalogProductVisibility = $catalogProductVisibility;
-        $this->configuration = $configuration;
-        $this->productCollectionFactory = $productCollectionFactory;
-        $this->requestBuilder = $requestBuilder;
-        $this->searchEngine = $searchEngine;
-
         parent::__construct(
             $context,
             $postDataHelper,
@@ -172,7 +162,7 @@ class ProductList extends \Magento\Catalog\Block\Product\ListProduct
             $this->_storeManager->getStore()->getId(),
             'catalog_view_container',
             1,
-            $this->configuration->getConfiguration()->getElasticsearch()->getLimit(),
+            $this->configuration->getLimit(),
         );
 
         $queryResponse = $this->searchEngine->search($searchRequest);
