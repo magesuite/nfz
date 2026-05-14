@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-
     <type name="Magento\Framework\App\RouterList">
         <arguments>
             <argument name="routerList" xsi:type="array">
                 <item name="nfzHealthcheck" xsi:type="array">
-                    <item name="class" xsi:type="string">MageSuite\Nfz\Controller\NfzHealthcheckUrlRouter</item>
+                    <item name="class" xsi:type="string">MageSuite\Nfz\Controller\Router</item>
                     <item name="disable" xsi:type="boolean">false</item>
                     <item name="sortOrder" xsi:type="string">40</item>
                 </item>
@@ -18,12 +17,12 @@
                 type="MageSuite\Nfz\Plugin\Framework\View\Layout\Generator\Block\ProductListErrorHandler" />
     </type>
 
-    <type name="MageSuite\Nfz\Helper\Configuration">
+    <type name="MageSuite\Nfz\Plugin\Framework\View\Layout\Generator\Block\ProductListErrorHandler">
         <arguments>
-            <argument name="healthcheckUrl" xsi:type="array">
-                <item name="elasticsearch" xsi:type="string">healthcheck/elasticsearch</item>
+            <argument name="blockList" xsi:type="array">
+                <item name="nfz.domain.list" xsi:type="string">nfz.domain.list</item>
+                <item name="nfz.product.list" xsi:type="string">nfz.product.list</item>
             </argument>
         </arguments>
     </type>
-
 </config>

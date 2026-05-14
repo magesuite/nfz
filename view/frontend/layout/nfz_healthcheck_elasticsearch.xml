@@ -1,7 +1,12 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="healthcheck">
     <body>
         <referenceContainer name="content">
-            <block class="MageSuite\Nfz\Block\Elasticsearch\ProductList" name="nfz.products.list" as="product_list" cacheable="false" template="Magento_Catalog::product/list.phtml">
+            <block class="Magento\Framework\View\Element\Template" name="nfz.domain.list" template="MageSuite_Nfz::domain/list.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">MageSuite\Nfz\ViewModel\DomainList</argument>
+                </arguments>
+            </block>
+            <block class="MageSuite\Nfz\Block\Elasticsearch\ProductList" name="nfz.product.list" as="product_list" cacheable="false" template="Magento_Catalog::product/list.phtml">
                 <arguments>
                     <argument name="grid_component_class" xsi:type="string">cs-grid-layout</argument>
                     <argument name="additional_grid_component_class" xsi:type="string">cs-grid-layout--category</argument>

@@ -1,0 +1,10 @@
+<?php
+/** @var \MageSuite\Nfz\ViewModel\DomainList $viewModel */
+$viewModel = $block->getViewModel();
+?>
+<div class="nfz-domain-list">
+    <?php foreach ($viewModel->getDomainList() as $domain => $sslStatus) : ?>
+        <div class="nfz-domain-list__domain"><?= $escaper->escapeHtml($domain) ?></div>
+        <div class="nfz-domain-list__status"><?= $sslStatus ? $escaper->escapeHtml(__('Yes')) : $escaper->escapeHtml(__('No')) ?></div>
+    <?php endforeach; ?>
+</div>

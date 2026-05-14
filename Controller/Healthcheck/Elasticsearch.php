@@ -4,20 +4,13 @@ declare(strict_types=1);
 
 namespace MageSuite\Nfz\Controller\Healthcheck;
 
-class Elasticsearch extends \Magento\Framework\App\Action\Action
+class Elasticsearch implements \Magento\Framework\App\Action\HttpGetActionInterface
 {
-    protected $resultPageFactory;
-
     public function __construct(
-        \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory
-    ) {
-        $this->resultPageFactory = $resultPageFactory;
+        protected \Magento\Framework\View\Result\PageFactory $resultPageFactory
+    ) {}
 
-        parent::__construct($context);
-    }
-
-    public function execute()
+    public function execute(): \Magento\Framework\View\Result\Page
     {
         return $this->resultPageFactory->create();
     }

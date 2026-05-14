@@ -4,59 +4,30 @@ declare(strict_types=1);
 
 namespace MageSuite\Nfz\Helper;
 
-class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
+class Configuration
 {
-    protected const CONFIGURATION_PATH = 'nfz';
-
-    protected \Magento\Framework\DataObject $config;
-    protected array $healthcheckUrl;
+    public const XML_PATH_ELASTICSEARCH_HEALTHCHECK_URL = 'nfz/elasticsearch/healthcheck_url';
+    public const XML_PATH_ELASTICSEARCH_LIMIT = 'nfz/elasticsearch/limit';
 
     public function __construct(
-        \Magento\Framework\App\Helper\Context $context,
-        array $healthcheckUrl
-    ) {
-        $this->healthcheckUrl = $healthcheckUrl;
+        protected \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+    ) {}
 
-        parent::__construct($context);
+    public function getHealthCheckUrl(?int $storeId = null): string
+    {
+        return $this->scopeConfig->getValue(
+            self::XML_PATH_ELASTICSEARCH_HEALTHCHECK_URL,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
     }
 
-    public function getConfiguration($storeId = null): \Magento\Framework\DataObject
+    public function getLimit(?int $storeId = null): int
     {
-        if (empty($this->config)) {
-            $this->initConfig();
-        }
-
-        return $this->config;
-    }
-
-    public function getHealthcheckUrl(): array
-    {
-        return [];
-    }
-
-    protected function initConfig(): void
-    {
-        $configuration = $this->scopeConfig->getValue(self::CONFIGURATION_PATH);
-        $configs = [];
-
-        foreach ($configuration as $key => $config) {
-            $this->setDefaultHealthcheckUrl($config, $key);
-            $configs[$key] = $this->config = new \Magento\Framework\DataObject($config);
-        }
-
-        $this->config = new \Magento\Framework\DataObject($configs);
-    }
-
-    protected function setDefaultHealthcheckUrl(array &$config, string $key)
-    {
-        if (isset($config['healthcheck_url']) && !empty($config['healthcheck_url'])) {
-            return;
-        }
-
-        if (empty($this->healthcheckUrl[$key])) {
-            return;
-        }
-
-        $config['healthcheck_url'] = $this->healthcheckUrl[$key];
+        return (int) $this->scopeConfig->getValue(
+            self::XML_PATH_ELASTICSEARCH_LIMIT,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
     }
 }
